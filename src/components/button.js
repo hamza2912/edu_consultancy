@@ -1,15 +1,29 @@
 import React from "react";
 
 
-function Button({title, action}) {
+function Button({title, onClick, type, href, target}) {
 
 
-    return (
+    if(type == 'anchor'){
 
-        <button className="rounded-r-lg rounded-bl-lg w-full py-3 text-center bg-btn bg-blue-400 text-white">{title}            
-        </button>       
+        return (
 
-    );
+            <a href={href} target={target} className="rounded-r-lg rounded-bl-lg px-6 py-3 text-center bg-btn text-white transition-all z-50">{title}            
+            </a>       
+    
+        );
+
+    } else{
+
+        return (
+
+            <button onClick={onClick} className="rounded-r-lg rounded-bl-lg w-full py-3 text-center bg-btn text-white transition-all z-50">{title}            
+            </button>       
+    
+        );
+        
+    }
+    
 }
 
 export default Button;

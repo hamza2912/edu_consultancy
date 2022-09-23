@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "dptransport-portal",
-    "staging": "dptransport-portal"
+    "default": "education-consultancy-uk",
+    "staging": "education-consultancy-uk"
   },
   "targets": {}
 }
