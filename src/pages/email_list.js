@@ -5,7 +5,8 @@ function Emaillist() {
 
     const [emailList, setemailList] = React.useState([]);
     const [betaList, setbetaList] = React.useState([]);
-    const [showemails, setshowemails] = React.useState(true);
+    const [formList, setformList] = React.useState([]);
+    const [showemails, setshowemails] = React.useState('emails');
     const db = getDatabase();
 
     React.useEffect(() => {
@@ -21,6 +22,12 @@ function Emaillist() {
                 setbetaList(snapshot.val());
             }
         });
+        const formlists = ref(db, `formList/`);
+        onValue(formlists, (snapshot) => {
+            if(snapshot.val()){
+                setformList(snapshot.val());
+            }
+        });
     },[]);
 
     return (
@@ -28,15 +35,18 @@ function Emaillist() {
       <div className='w-full h-auto overflow-x-hidden container mx-auto pt-32 min-h-screen'>
 
         <div className='lg:w-4/5 w-full mx-auto'>
-        <div className='grid grid-cols-2 cursor-pointer'>
-            <div onClick={()=>setshowemails(true)} className={showemails ? 'bg-mate w-full text-center text-black rounded-md py-5' : 'w-full text-center rounded-md py-5'}>
+        <div className='grid grid-cols-3 cursor-pointer'>
+            <div onClick={()=>setshowemails('emails')} className={showemails == 'emails' ? 'bg-mate w-full text-center text-black rounded-md py-5' : 'w-full text-center rounded-md py-5'}>
                 <h1 className='lg:text-lg text-sm'>Email List</h1>
             </div>
-            <div onClick={()=>setshowemails(false)} className={!showemails ? 'bg-mate w-full text-center text-black rounded-md py-5' : 'w-full text-center rounded-md py-5'}>
+            <div onClick={()=>setshowemails('beta')} className={!showemails == 'beta' ? 'bg-mate w-full text-center text-black rounded-md py-5' : 'w-full text-center rounded-md py-5'}>
                 <h1 className='lg:text-lg text-sm'>Beta Program List</h1>
             </div>
+            <div onClick={()=>setshowemails('forms')} className={!showemails == 'forms' ? 'bg-mate w-full text-center text-black rounded-md py-5' : 'w-full text-center rounded-md py-5'}>
+                <h1 className='lg:text-lg text-sm'>Forms</h1>
+            </div>
         </div>
-        { showemails ?
+        { showemails == 'emails' ?
         <table class="ui celled table">
             <thead>
                 <tr>
@@ -61,7 +71,8 @@ function Emaillist() {
 
             </tbody>
         </table>
-        : <table class="ui celled table">
+        : showemails == 'beta' ? 
+        <table class="ui celled table">
             <thead>
                 <tr>
                 <th>S.No</th>
@@ -86,7 +97,38 @@ function Emaillist() {
                 }
 
             </tbody>
+        </table> :
+         <table class="ui celled table">
+            <thead>
+                <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {
+                    formList.length > 0 ?
+                    formList.map((user, index) => {
+                        return (
+                            <tr>
+                                <td>{index +1}</td>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.phone}</td>
+                                <td>{user.message}</td>
+                            </tr> 
+                        )
+                    }) :
+                    <p>No forms submissions yet!</p>       
+                }
+
+            </tbody>
         </table>
+
         }
 
         </div>

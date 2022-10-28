@@ -9,8 +9,11 @@ function Home() {
   let history = useHistory();
   const [email, setemail] = React.useState("");
   const [study, setstudy] = React.useState("");
+  const [phone, setphone] = React.useState("");
+  const [Name, setName] = React.useState("");
   const [emailList, setemailList] = React.useState([]);
   const [betaList, setbetaList] = React.useState([]);
+  const [formList, setformList] = React.useState([]);
   const db = getDatabase();
 
   React.useEffect(() => {
@@ -26,6 +29,12 @@ function Home() {
             setbetaList(snapshot.val());
         }
     });
+    const formlists = ref(db, `formList/`);
+    onValue(formlists, (snapshot) => {
+        if(snapshot.val()){
+            setformList(snapshot.val());
+        }
+    });
 },[]);
 
 
@@ -37,6 +46,24 @@ function submitEmail() {
     set(ref(db, 'emailList'), emails);
     setemail("");
     alert("Thank you for submitting your email");
+  }
+}
+
+function submitForm() {
+  if(email != '' && Name != ''){
+    var forms = formList;
+    var formValues = {
+      name: Name,
+      email: email,
+      phone: phone,
+      message: study
+    }
+    forms.push(formValues);
+    set(ref(db, 'formList'), forms);
+    setemail("");
+    alert("Thank you for submitting your form");
+  } else{
+    alert("Please fill the form details");
   }
 }
 
@@ -87,9 +114,9 @@ const services_responsiveness = {
       <section id='home' className='w-full lg:h-screen h-auto grid lg:grid-cols-2 grid-cols-1 pt-16 lg:pt-0'>
         <div className='flex items-center justify-start lg:h-full py-16 lg:py-0'>
           <div className='content lg:w-3/4 w-10/11 relative z-10'>
-            <h1 data-aos="fade-right" data-aos-duration="800" className='lg:text-5xl text-3xl'>Take Right Decisions and Master your destiny.</h1>
-            <p data-aos="fade-right" data-aos-duration="800" className='my-8 text-black text-xl'>Studying abroad is not a dream now, See how we make it happen.</p>
-            <div data-aos="fade-right" data-aos-duration="800" className='lg:w-1/2 w-full'>
+            <h1 data-aos="fade-right" data-aos-duration="800" className='lg:text-4xl text-3xl'>Studying abroad is not a dream now.</h1>
+            <p data-aos="fade-right" data-aos-duration="800" className='my-5 text-black text-xl'>Take Right Decisions and Master your destiny - See how we make it happen.</p>
+            <div data-aos="fade-right" data-aos-duration="800" className='lg:w-2/3 w-full'>
               <Button  title="Yes!  Show me now" type='anchor' href="#journey" />
             </div>
             <img className='absolute lg:w-24 w-16 lg:-top-20 -top-12 left-1/3 z-minus' src="images/icons/globe.svg" alt="" />
@@ -120,13 +147,13 @@ const services_responsiveness = {
       <section className='lg:h-40 h-10'></section>
       
       <section id='about' className='w-full lg:h-screen h-auto py-16 lg:pt-5'>
-        <h1 data-aos="fade-zoom-in" data-aos-duration="800" className='text-center lg:text-5xl text-3xl my-10'>Who we are</h1>
+        <h1 data-aos="fade-zoom-in" data-aos-duration="800" className='text-center lg:text-5xl text-3xl my-10'>Who are we?</h1>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-20 lg:gap-0'>
           <div className='flex justify-start items-center text-gray-600'>
             <div data-aos="fade-right" data-aos-duration="800" className='lg:w-11/12 w-full z-10'>
-              <p className='lg:text-xl text-lg text-black text-center lg:text-left'>Trescents make it hassle-free for you to get an education overseas. We believe that the Trescent is a condition in which you are in control of your future. Our purpose is to assist you in achieving it by removing obstacles from your way through our counseling sessions, securing an acceptance offer from your dream university, and giving you professional advice on visa application so that you understand the process like the back of your hand. Enter the educational sea and develop your inner greatness—the greatness that transforms the world.</p>
+              <p className='lg:text-xl text-lg text-black text-center lg:text-left'>Trescents make it easier for you to study abroad. We make it happen and enable you to master your own destiny. Our UK Higher Education experienced professional will guide you throughout the admissions, visa, and pre and post-departure process. Our visa and admissions expert counselors will make your admissions and visa applicant journey smooth, pleasant, and completely hassle free. Contact now and start your process.</p>
               <div className='mt-8 relative flex justify-center lg:justify-start'>
-                  <Button title="Yes!  I want to know more" type='anchor' href="https://wa.me/923363781910" target="_blank" />
+                  <Button title="Yes!  I want to know more" type='anchor' href="https://wa.me/923222240336" target="_blank" />
                   <img className='absolute w-24 left-0 -bottom-24 z-0' src="images/icons/spiral.svg" alt="" />
               </div>
             </div>
@@ -150,6 +177,8 @@ const services_responsiveness = {
           <div class="item flex justify-center"><div className='lg:w-3/5 w-full -mt-10'><img src="images/partners/image-5.png" alt="partner 3"/></div></div>
           <div class="item flex justify-center"><div className='lg:w-4/5 w-full'><img src="images/partners/image-4.png" alt="partner 4"/></div></div>
           <div class="item flex justify-center"><div className='lg:w-3/5 -mt-2 w-full'><img src="images/partners/image-6.png" alt="partner 5"/></div></div>
+          <div class="item flex justify-center"><div className='lg:w-2/5 w-full'><img src="images/partners/images-7.png" alt="partner 6"/></div></div>
+          <div class="item flex justify-center"><div className='lg:w-4/5 w-full'><img src="images/partners/images-8.png" alt="partner 7"/></div></div>
         </OwlCarousel>
         <div data-aos="flip-left" data-aos-duration="800" className='bg-pink grid lg:grid-cols-2 grid-cols-1 lg:px-24 px-5 py-12 relative'>
           <div data-aos="fade-right" data-aos-duration="800" data-aos-delay="500">
@@ -177,31 +206,31 @@ const services_responsiveness = {
         <div data-aos="fade-right" data-aos-duration="800"  className='flex gap-4'>
           <h1 className='text-9xl'>1</h1>
           <div className='flex flex-col'>
-            <h1 className='text-4xl text-black'>Mentoring Session</h1>
-            <p className='w-4/5 text-xl my-4'>Visit our office to meet with a counselor and receive free counseling, or if you live too far away to visit, schedule a free Skype consultation.</p>
-            <h2 className='text-xl font-semibold'>Duration: <span className='text-red-600 font-normal'>1-2 Days</span></h2>
-            <a href="https://wa.me/923363781910" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Let's Chat and Meet</a>
+            <h1 className='text-4xl text-black'>Free Initial Assesment</h1>
+            <p className='w-4/5 text-xl my-4'>It is often the case that people don't know where you stands based on your profile. Get a free evaluation of your profile from us.</p>
+            <h2 className='text-xl font-semibold'>Duration: <span className='text-red-600 font-normal'>Less than a Day</span></h2>
+            <a href="https://wa.me/923222240336" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Let's Chat and Meet</a>
           </div>
         </div>
-        <img className='w-4/5' src="images/process/step1.svg" alt="" />
-        <img className='w-3/5 hidden lg:block' src="images/process/step4.svg" alt="" />
+        <img className='lg:w-3/5 w-4/5' src="images/process/step4.svg" alt="" />
+        <img className='w-4/5 hidden lg:block' src="images/process/step1.svg" alt="" />
         <div data-aos="fade-left" data-aos-duration="800"  className='flex gap-4'>
           <h1 className='text-9xl'>2</h1>
           <div className='flex flex-col'>
-            <h1 className='text-4xl text-black'>Avatar Assesment</h1>
-            <p className='w-4/5 text-xl my-4'>It is often the case that people don't know where you stands based on your profile. Get a free evaluation of your profile from us.</p>
-            <h2 className='text-xl font-semibold'>Duration: <span className='text-red-600 font-normal'>1-2 Days</span></h2>
-            <a href="https://wa.me/923363781910" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Evaluate my Profile</a>
+            <h1 className='text-4xl text-black'>Counselling Session</h1>
+            <p className='w-4/5 text-xl my-4'>Visit our office to meet with a counselor and receive free counseling, or if you live too far away to visit, schedule a free Skype consultation.</p>
+            <h2 className='text-xl font-semibold'>Duration: <span className='text-red-600 font-normal'>Less than a Day</span></h2>
+            <a href="https://wa.me/923222240336" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Evaluate my Profile</a>
           </div>
         </div>
-        <img className='w-4/5 lg:hidden' src="images/process/step4.svg" alt="" />
+        <img className='w-4/5 lg:hidden' src="images/process/step1.svg" alt="" />
         <div data-aos="fade-right" data-aos-duration="800"  className='flex gap-4'>
           <h1 className='text-9xl'>3</h1>
           <div className='flex flex-col'>
             <h1 className='text-4xl text-black'>Application Process</h1>
-            <p className='w-4/5 text-xl my-4'>Your admittance is just a click away. For further information, get in touch with us.</p>
-            <h2 className='text-xl font-semibold'>Duration: <span className='text-red-600 font-normal'>6-8 Weeks</span></h2>
-            <a href="https://wa.me/923363781910" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Begin my Application</a>
+            <p className='w-4/5 text-xl my-4'>Your admissions are just a click away. Get in touch with us for further information.</p>
+            <h2 className='text-xl font-semibold'>Duration: <span className='text-red-600 font-normal'>4 Weeks</span></h2>
+            <a href="https://wa.me/923222240336" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Begin my Application</a>
           </div>
         </div>
         <img className='w-1/2' src="images/process/step2.svg" alt="" />
@@ -211,8 +240,8 @@ const services_responsiveness = {
           <div className='flex flex-col'>
             <h1 className='text-4xl text-black'>VISA  <span className='lg:text-4xl text-3xl'>Processing</span></h1>
             <p className='w-4/5 text-xl my-4'>Getting a visa involves organizing your paperwork in accordance with visa regulations. understand the proper techniques to ace your visa interview.</p>
-            <h2 className='text-xl font-semibold'>Duration: <span className='text-red-600 font-normal'>4-6 Weeks</span></h2>
-            <a href="https://wa.me/923363781910" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Apply for my VISA</a>
+            <h2 className='text-xl font-semibold'>Duration: <span className='text-red-600 font-normal'>3 Weeks</span></h2>
+            <a href="https://wa.me/923222240336" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Apply for my VISA</a>
           </div>
         </div>
         <img className='w-4/5 lg:hidden' src="images/process/step5.svg" alt="" />
@@ -220,8 +249,8 @@ const services_responsiveness = {
           <h1 className='text-9xl'>5</h1>
           <div className='flex flex-col'>
             <h1 className='text-4xl text-black'>Ready to Departure</h1>
-            <p className='w-4/5 text-xl my-4'>You can feel anxious about going overseas to school. We've set up a pre- and post-departure orientation for you as a result of our commitment to you. The orientation will give you all the information you need and help you get settled into your new life abroad.</p>
-            <a href="https://wa.me/923363781910" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Lets Meet before I Fly</a>
+            <p className='w-4/5 text-xl my-4'>Moving in to a new country and adapting a new culture and system may be difficult for some. During the pre and post departure , Trescents expert counsellor will provide you full support and information to help you settle in the UK.</p>
+            <a href="https://wa.me/923222240336" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Lets Meet before I Fly</a>
           </div>
         </div>
         <img className='w-4/5' src="images/process/step3.svg" alt="" />
@@ -285,8 +314,8 @@ const services_responsiveness = {
                 <img className='w-12' src="images/icons/filters.svg" alt="" />
               </div>
             </div>
-            <p className='my-6'>Institutions abroad frequently demand confirmation of English language proficiency. In order to guarantee that the student receives a good score, we offer intensive instruction and extensive training.</p>
-            <Button title="Explore More" type='anchor' href="https://wa.me/923363781910" target="_blank"/>
+            <p className='my-6'>Universities abroad frequently demand confirmation of English language proficiency. In order to guarantee that the student receives a good score, we offer extensive training.</p>
+            <Button title="Explore More" type='anchor' href="https://wa.me/923222240336" target="_blank"/>
           </div>
           <div className='item bg-white lg:px-16 px-6 lg:py-20 py-12'>
             <div className='flex justify-between'>
@@ -295,8 +324,8 @@ const services_responsiveness = {
                 <img className='w-12' src="images/icons/filters.svg" alt="" />
               </div>
             </div>
-            <p className='my-6'>Our knowledgeable counselors take into account your educational background, hobbies, skills, and market trends before recommending the best possible pathways that are personalized to your needs.</p>
-            <Button title="Explore More" type='anchor' href="https://wa.me/923363781910" target="_blank"/>
+            <p className='my-6'>Our knowledgeable counselors take into account your educational background, interests, skills, and market trends before recommending the best possible pathways that are personalized to your needs.</p>
+            <Button title="Explore More" type='anchor' href="https://wa.me/923222240336" target="_blank"/>
           </div>
           <div className='item bg-white lg:px-16 px-6 lg:py-20 py-12'>
             <div className='flex justify-between'>
@@ -305,8 +334,8 @@ const services_responsiveness = {
                 <img className='w-12' src="images/icons/filters.svg" alt="" />
               </div>
             </div>
-            <p className='my-6'>We personally handle the application procedure and advise the student on the proper set of supporting documents needed. Additionally, we immediately get in touch with the institution to ensure a quick admissions procedure.</p>
-            <Button title="Explore More" type='anchor' href="https://wa.me/923363781910" target="_blank"/>
+            <p className='my-6'>We personally handle the application procedure and advise the student on the proper set of supporting required documents. Additionally, we immediately get in touch with the institution to ensure a quick turn around of your offer letter.</p>
+            <Button title="Explore More" type='anchor' href="https://wa.me/923222240336" target="_blank"/>
           </div>
           <div className='item bg-white lg:px-16 px-6 lg:py-20 py-12'>
             <div className='flex justify-between'>
@@ -315,10 +344,10 @@ const services_responsiveness = {
                 <img className='w-12' src="images/icons/filters.svg" alt="" />
               </div>
             </div>
-            <p className='my-6'>We communicate regularly with embassies, consulates, and other relevant departments. Our counselors are therefore up to date on all applicable laws and regulations. Our success record in obtaining visas is hence very high.</p>
-            <Button title="Explore More" type='anchor' href="https://wa.me/923363781910" target="_blank"/>
+            <p className='my-6'>Our experts have experience of working with relevant government departments across the globe. Our counselors are therefore up to date on all applicable laws and regulations. Our success record in obtaining visas is hence very high.</p>
+            <Button title="Explore More" type='anchor' href="https://wa.me/923222240336" target="_blank"/>
           </div>
-          <div className='item bg-white lg:px-16 px-6 lg:py-20 py-12'>
+          {/* <div className='item bg-white lg:px-16 px-6 lg:py-20 py-12'>
             <div className='flex justify-between'>
               <h1 className='lg:text-4xl text-3xl text-black'>University <br /> Guidance</h1>
               <div className='flex justify-center items-center lg:w-24 lg:h-24 w-16 h-16 rounded-full bg-pink'>
@@ -326,8 +355,8 @@ const services_responsiveness = {
               </div>
             </div>
             <p className='my-6'>To study at one of the best colleges in the world, Pakistani students should apply for the widest range of international scholarships possible.</p>
-            <Button title="Explore More" type='anchor' href="https://wa.me/923363781910" target="_blank"/>
-          </div>
+            <Button title="Explore More" type='anchor' href="https://wa.me/923222240336" target="_blank"/>
+          </div> */}
           <div className='item bg-white lg:px-16 px-6 lg:py-20 py-12'>
             <div className='flex justify-between'>
               <h1 className='lg:text-4xl text-2xl text-black'>Personal Statement/SOP  <br /> Writing & Assessment </h1>
@@ -336,7 +365,7 @@ const services_responsiveness = {
               </div>
             </div>
             <p className='my-6'>The admissions staff is curious to learn more about you. With the help of our SOP experienced team, express your reflections, accomplishments, and ideas in the best possible manner and get your amazing SOP done.</p>
-            <Button title="Explore More" type='anchor' href="https://wa.me/923363781910" target="_blank"/>
+            <Button title="Explore More" type='anchor' href="https://wa.me/923222240336" target="_blank"/>
           </div>
           <div className='item bg-white lg:px-16 px-6 lg:py-20 py-12'>
             <div className='flex justify-between'>
@@ -346,7 +375,7 @@ const services_responsiveness = {
               </div>
             </div>
             <p className='my-6'>TWe provide a variety of pre and post-departure workshops to help you take advantage of the personal and cultural opportunities available to you while traveling and feel at home.</p>
-            <Button title="Explore More" type='anchor' href="https://wa.me/923363781910" target="_blank"/>
+            <Button title="Explore More" type='anchor' href="https://wa.me/923222240336" target="_blank"/>
           </div>
           <div className='item bg-white lg:px-16 px-6 lg:py-20 py-12'>
             <div className='flex justify-between'>
@@ -356,7 +385,7 @@ const services_responsiveness = {
               </div>
             </div>
             <p className='my-6'>We summarize your profile based on the data you provided and give you a complete analysis of your chances of receiving a visa based on instructions from the Embassy.</p>
-            <Button title="Explore More" type='anchor' href="https://wa.me/923363781910" target="_blank"/>
+            <Button title="Explore More" type='anchor' href="https://wa.me/923222240336" target="_blank"/>
           </div>
           <div className='item bg-white lg:px-16 px-6 lg:py-20 py-12'>
             <div className='flex justify-between'>
@@ -366,13 +395,77 @@ const services_responsiveness = {
               </div>
             </div>
             <p className='my-6'>CV is the vital part of an application, on which your admission depends. We help you curate professional winning CVs.</p>
-            <Button title="Explore More" type='anchor' href="https://wa.me/923363781910" target="_blank"/>
+            <Button title="Explore More" type='anchor' href="https://wa.me/923222240336" target="_blank"/>
           </div>
         </OwlCarousel>
 
         <img className='absolute w-1/3 lg:bottom-0 top-0 right-0 z-0' src="images/icons/cloud.svg" alt="" />
         <img className='absolute w-1/5 lg:bottom-20 bottom-32 left-0 z-0' src="images/icons/cloud_sm.svg" alt="" />
       </div>
+    </section>
+
+    <section className='w-full h-auto lg:py-56 pt-10 relative'>
+      <div className='bg-pink'>
+        <div className='container mx-auto w-full h-auto lg:px-16 px-6 grid lg:grid-cols-2 grid-cols-1 py-16'>
+          <div className=''>
+            <div data-aos="fade-right" data-aos-duration="800" className='flex flex-col'>
+              <div className='flex gap-2 items-center'>
+                <img className='w-7' src="images/icons/call.svg" alt="Call icon" />
+                <p className='text-3xl text-gray-700 font-semibold'>Call us</p>
+              </div>
+              <p className='mt-2 text-gray-700'>+(92) 3222240336</p>
+            </div>
+            <div data-aos="fade-right" data-aos-duration="800" data-aos-delay='50' className='flex flex-col mt-16'>
+              <div className='flex gap-2 items-center'>
+                <img className='w-7' src="images/icons/location.svg" alt="Location icon" />
+                <p className='text-3xl text-gray-700 font-semibold'>Location</p>
+              </div>
+              <p className='mt-2 text-gray-700 w-4/5'>Office # 507 5th Floor, Caesar Tower Main Shahr-e-Faisal, Karachi</p>
+            </div>
+            <div data-aos="fade-right" data-aos-duration="800" data-aos-delay='100' className='flex flex-col mt-16'>
+              <div className='flex gap-2 items-center'>
+                <img className='w-7' src="images/icons/global.svg" alt="Globe icon" />
+                <p className='text-3xl text-gray-700 font-semibold'>Mail us</p>
+              </div>
+              <p className='mt-2 text-gray-700'>contact@trescents.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='bg-white shadow-lg lg:w-1/2 w-full lg:absolute relative lg:top-32 left-custom p-12'>
+        <h1 data-aos="fade-zoom-in" data-aos-duration="800" className='lg:text-5xl text-3xl my-10 text-center lg:text-left'>Contact Now</h1>
+        <div class="w-full">
+            <div>
+                <div class="mb-4">
+                    <input value={Name} onChange={(event) => setName(event.target.value)}
+                        class="border-b-2 w-full py-4 focus:outline-none focus:shadow-outline-none input-form"
+                        type="text"
+                        placeholder="Name"
+                    />
+                </div>
+                <div class="mb-4">
+                    <input value={email} onChange={(event) => setemail(event.target.value)}
+                        class="border-b-2 w-full py-4 focus:outline-none focus:shadow-outline-none input-form"
+                        id="email" type="text" placeholder="Email" />
+                </div>
+                <div class="mb-4">
+                    <input value={phone} onChange={(event) => setphone(event.target.value)}
+                        class="border-b-2 w-full py-4 focus:outline-none focus:shadow-outline-none input-form"
+                        id="email" type="text" placeholder="Phone" />
+                </div>
+                <div class="mb-6">
+                    <textarea  value={study} onChange={(event) => setstudy(event.target.value)}
+                    class="border-b-2 w-full py-4 focus:outline-none focus:shadow-outline-none input-form"
+                        id="message" rows='5' placeholder="Message"></textarea>
+                </div>
+                <div class="lg:w-1/3 w-1/2">
+                  <Button onClick={submitForm} title="Send"/>
+                </div>
+            </div>
+        </div>
+
+      </div>
+
     </section>
 
     </>

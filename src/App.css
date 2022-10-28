@@ -152,4 +152,7 @@ a{
   .center{
     opacity: 1 !important;
   }
+  .left-custom{
+    left: 45%;
+  }
 }
