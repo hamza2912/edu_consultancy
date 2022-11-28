@@ -19,6 +19,10 @@ p{
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+.text-vs{
+  font-size: 10px;
+}
+
 a{
   cursor: pointer;
 }
@@ -142,6 +146,9 @@ a{
 @media only screen and (max-width:786px) {
   .w-12 {
     width: 2rem !important;
+  }
+  .text-vs{
+    font-size: 8px !important;
   }
 }
 

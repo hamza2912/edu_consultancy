@@ -153,7 +153,7 @@ const services_responsiveness = {
             <div data-aos="fade-right" data-aos-duration="800" className='lg:w-11/12 w-full z-10'>
               <p className='lg:text-xl text-lg text-black text-center lg:text-left'>Trescents make it easier for you to study abroad. We make it happen and enable you to master your own destiny. Our UK Higher Education experienced professional will guide you throughout the admissions, visa, and pre and post-departure process. Our visa and admissions expert counselors will make your admissions and visa applicant journey smooth, pleasant, and completely hassle free. Contact now and start your process.</p>
               <div className='mt-8 relative flex justify-center lg:justify-start'>
-                  <Button title="Yes!  I want to know more" type='anchor' href="https://wa.me/923222240336" target="_blank" />
+                  <Button title="Yes, I want to know more." type='anchor' href="https://wa.me/923222240336" target="_blank" />
                   <img className='absolute w-24 left-0 -bottom-24 z-0' src="images/icons/spiral.svg" alt="" />
               </div>
             </div>
@@ -218,7 +218,7 @@ const services_responsiveness = {
           <h1 className='text-9xl'>2</h1>
           <div className='flex flex-col'>
             <h1 className='text-4xl text-black'>Counselling Session</h1>
-            <p className='w-4/5 text-xl my-4'>Visit our office to meet with a counselor and receive free counseling, or if you live too far away to visit, schedule a free Skype consultation.</p>
+            <p className='w-4/5 text-xl my-4'>Visit our office to meet a counsellor and receive free counseling. Please schedule a free online Consultation if you live far away</p>
             <h2 className='text-xl font-semibold'>Duration: <span className='text-red-600 font-normal'>Less than a Day</span></h2>
             <a href="https://wa.me/923222240336" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Evaluate my Profile</a>
           </div>
@@ -228,7 +228,7 @@ const services_responsiveness = {
           <h1 className='text-9xl'>3</h1>
           <div className='flex flex-col'>
             <h1 className='text-4xl text-black'>Application Process</h1>
-            <p className='w-4/5 text-xl my-4'>Your admissions are just a click away. Get in touch with us for further information.</p>
+            <p className='w-4/5 text-xl my-4'>Your admission is just a click away. Get in touch with us for further information.</p>
             <h2 className='text-xl font-semibold'>Duration: <span className='text-red-600 font-normal'>4 Weeks</span></h2>
             <a href="https://wa.me/923222240336" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Begin my Application</a>
           </div>
@@ -250,7 +250,8 @@ const services_responsiveness = {
           <div className='flex flex-col'>
             <h1 className='text-4xl text-black'>Ready to Departure</h1>
             <p className='w-4/5 text-xl my-4'>Moving in to a new country and adapting a new culture and system may be difficult for some. During the pre and post departure , Trescents expert counsellor will provide you full support and information to help you settle in the UK.</p>
-            <a href="https://wa.me/923222240336" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Lets Meet before I Fly</a>
+            <a href="https://wa.me/923222240336" target="_blank" className='text-lg text-blue-400 font-medium mt-2'>Let's meet before you fly
+</a>
           </div>
         </div>
         <img className='w-4/5' src="images/process/step3.svg" alt="" />

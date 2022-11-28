@@ -25,8 +25,9 @@ function Header() {
             <nav className="container mx-auto lg:py-10 py-6 lg:px-16 px-6 flex flex-row justify-between items-center w-full">
                 <div class="w-1/3 flex justify-start">
                     <div class="logo">
-                        <a onClick={()=>{history.push('/');setscreenChange(!screenChange)}}>
+                        <a className="flex flex-col" onClick={()=>{history.push('/');setscreenChange(!screenChange)}}>
                             <img className="lg:w-20 w-16" src="images/logo/trescents_logo.png" alt="Consultancy Logo" />
+                            <span className="text-black text-vs mt-0">We make it happen!</span>
                             {/* <h1 className="text-2xl text-black font-semibold">Logo</h1>  */}
                         </a>    
                     </div>
